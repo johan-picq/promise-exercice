@@ -1,6 +1,6 @@
 import { services, getTimer, initTimer } from "./init.js";
 
-export const initPromiseServices = () => {
+export const initAsyncServices = () => {
   initTimer();
-  console.log("promise");
+  console.log("async");
 };
