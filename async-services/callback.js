@@ -1,7 +1,7 @@
-import { services, startService } from "./init.js";
+import { services, startServiceWithCallback } from "./init.js";
 
-services.forEach((s, i) => {
-  if (!s.dependancies) {
-    startService(i + 1, s.duration);
+services.forEach((service) => {
+  if (service.dependancies === null) {
+    startServiceWithCallback(service.id, service.duration);
   }
 });
