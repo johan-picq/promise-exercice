@@ -37,34 +37,12 @@ export const services = [
 ];
 const TotalDurationServices = 16000;
 let timer = 0;
-
-export const startServiceWithCallback = (service, duration, callback) => {
-  let nextServiceToWork = null;
-  services.forEach((s) => {
-    if (s.dependancies === service) {
-      nextServiceToWork = s;
-    }
-  });
-  console.log("#", service, "started at", timer, "ms");
-  setTimeout(() => {
-    console.log("#", service, "ended at", timer, "ms");
-    callback(nextServiceToWork);
-  }, duration);
-};
-
-export const startServiceCallback = (nextServiceToWork) => {
-  if (nextServiceToWork) {
-    startServiceWithCallback(
-      nextServiceToWork.id,
-      nextServiceToWork.duration,
-      startServiceCallback
-    );
-  }
-};
-
-let interval = setInterval(() => {
+const interval = setInterval(() => {
   timer = timer + 100;
   if (timer >= TotalDurationServices) {
     clearInterval(interval);
   }
 }, 100);
+export const getTimer = () => {
+  return timer;
+};
