@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      font-family: monospace;
+      font-size: 16px;
+    }
+    h1 {
+      margin: 0 0 20px;
+    }
+    .group {
+      border: 2px solid black;
+      margin-bottom: 20px;
+      padding: 20px;
+    }
+    .flex {
+      display: flex;
+    }
+    .service {
+      border: 1px solid black;
+      box-shadow: 5px 5px #ddd;
+      height: 100px;
+      margin: 20px;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="group">
+    <h1>Services with no dependencies</h1>
+    <div class="flex">
+      <div class="service">
+        <div>[Service #1] No deps with other services</div>
+        <div>[Service #1] Started at 0s</div>
+        <div>[Service #1] Ended at 9.2s (random timeout between 0 and 10 seconds)</div>
+      </div>
+      <div class="service">
+        <div>[Service #2] No deps with other services</div>
+        <div>[Service #2] Started at 0s</div>
+        <div>[Service #2] Ended at 1.4s (random timeout between 0 and 10 seconds)</div>
+      </div>
+    </div>
+    <div class="flex">
+      <div class="service">
+        <div>[Service #3] No deps with other services</div>
+        <div>[Service #3] Started at 0s</div>
+        <div>[Service #3] Ended at 7.9s (random timeout between 0 and 10 seconds)</div>
+      </div>
+      <div class="service">
+        <div>[Service #4] No deps with other services</div>
+        <div>[Service #4] Started at 0s</div>
+        <div>[Service #4] Ended at 3.0s (random timeout between 0 and 10 seconds)</div>
+      </div>
+    </div>
+  </div>
+  <div class="group">
+    <h1>Dependencies with services #1, #2, #3 and #4</h1>
+    <div class="flex">
+      <div class="service">
+        <div>[Service #5] Waiting services #1 and #2 to end</div>
+        <div>[Service #5] Started at 9.2s</div>
+        <div>[Service #5] Ended at 11.4s (random timeout between 0 and 10 seconds)</div>
+      </div>
+      <div class="service">
+        <div>[Service #6] Waiting services #3 and #4 to end</div>
+        <div>[Service #6] Started at 7.9s</div>
+        <div>[Service #6] Ended at 8.5s (random timeout between 0 and 10 seconds)</div>
+      </div>
+    </div>
+  </div>
+  <div class="group">
+    <h1>Dependencies with services #5 and #6</h1>
+    <div class="service">
+      <div>[Service #7] Waiting services #5 and #6 to end</div>
+      <div>[Service #7] Started at 11.4s</div>
+      <div>[Service #7] Ended at 15.1s (random timeout between 0 and 10 seconds)</div>
+    </div>
+  </div>
+  <script type="module" src="/main.js"></script>
+</body>
+</html>
