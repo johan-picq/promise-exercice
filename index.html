@@ -20,17 +20,48 @@
     }
     .flex {
       display: flex;
+      justify-content: space-between;
     }
     .service {
       border: 1px solid black;
+      background: #fff;
       box-shadow: 5px 5px #ddd;
-      height: 100px;
+      height: auto;
       margin: 20px;
       padding: 20px;
+      font-family: monospace;
+      font-size: 16px;
+    }
+    .button {
+      appearance: none;
+      margin: 5px;
+      padding: 5px;
+      cursor: pointer;
+      transition: .2s;
+    }
+    .button:hover {
+      box-shadow: 10px 10px #ddd;
+    }
+    .button:disabled {
+      box-shadow: none !important;
+      background-color: #ddd;
     }
   </style>
 </head>
 <body>
+  <div class="group">
+    <div class="flex">
+      <button class="service button" id="run-callback">
+        Run Callback Services
+      </button>
+      <button class="service button" id="run-promise">
+        Run Promise Services
+      </button>
+      <button class="service button" id="run-async">
+        Run Async/Await Services
+      </button>
+    </div>
+  </div>
   <div class="group">
     <h1>Services with no dependencies</h1>
     <div class="flex">
