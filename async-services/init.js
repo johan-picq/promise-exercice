@@ -21,41 +21,45 @@ export const services = [
   },
   {
     id: 5,
-    dependancies: 0,
+    dependancies: 1,
     duration: 2200,
   },
   {
     id: 6,
-    dependancies: 2,
+    dependancies: 3,
     duration: 600,
   },
   {
     id: 7,
-    dependancies: 4,
+    dependancies: 5,
     duration: 3200,
   },
 ];
 const TotalDurationServices = 16000;
 let timer = 0;
 
-export const startServiceWithCallback = (service, duration) => {
+export const startServiceWithCallback = (service, duration, callback) => {
   let nextServiceToWork = null;
-  services.forEach((service) => {
-    if (service.dependancies === service) {
-      nextServiceToWork = service;
+  services.forEach((s) => {
+    if (s.dependancies === service) {
+      nextServiceToWork = s;
     }
   });
   console.log("#", service, "started at", timer, "ms");
   setTimeout(() => {
     console.log("#", service, "ended at", timer, "ms");
-    if (nextServiceToWork) {
-      console.log("next");
-      startServiceWithCallback(
-        nextServiceToWork.id,
-        nextServiceToWork.duration
-      );
-    }
+    callback(nextServiceToWork);
   }, duration);
+};
+
+export const startServiceCallback = (nextServiceToWork) => {
+  if (nextServiceToWork) {
+    startServiceWithCallback(
+      nextServiceToWork.id,
+      nextServiceToWork.duration,
+      startServiceCallback
+    );
+  }
 };
 
 let interval = setInterval(() => {

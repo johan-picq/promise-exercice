@@ -1,7 +1,15 @@
-import { services, startServiceWithCallback } from "./init.js";
+import {
+  services,
+  startServiceWithCallback,
+  startServiceCallback,
+} from "./init.js";
 
 services.forEach((service) => {
   if (service.dependancies === null) {
-    startServiceWithCallback(service.id, service.duration);
+    return startServiceWithCallback(
+      service.id,
+      service.duration,
+      startServiceCallback
+    );
   }
 });
