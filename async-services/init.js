@@ -1,45 +1,46 @@
-const services = [
+export const services = [
   {
-    denpendancies: null,
+    dependancies: null,
     duration: 9200,
   },
   {
-    denpendancies: null,
+    dependancies: null,
     duration: 1400,
   },
   {
-    denpendancies: null,
+    dependancies: null,
     duration: 7900,
   },
   {
-    denpendancies: null,
+    dependancies: null,
     duration: 3000,
   },
   {
-    denpendancies: [0, 1],
+    dependancies: [0, 1],
     duration: 2200,
   },
   {
-    denpendancies: [2, 3],
+    dependancies: [2, 3],
     duration: 600,
   },
   {
-    denpendancies: [4, 5],
+    dependancies: [4, 5],
     duration: 3200,
   },
 ];
+const TotalDurationServices = 16000;
+let timer = 0;
 
-function startService(service, duration) {
-  if (duration) {
-    setTimeout(() => {
-      console.log("#", service, " started");
-    }, duration);
-  } else {
-    console.log("#", service, " started");
-  }
-}
-function endService(service, duration) {
+export function startService(service, duration) {
+  console.log("#", service, "started at", timer, "ms");
   setTimeout(() => {
-    console.log("#", service, " ended");
+    console.log("#", service, "ended at", timer, "ms");
   }, duration);
 }
+
+let interval = setInterval(() => {
+  timer = timer + 100;
+  if (timer >= TotalDurationServices) {
+    clearInterval(interval);
+  }
+}, 100);
