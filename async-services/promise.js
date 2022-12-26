@@ -1,4 +1,4 @@
-import { services, getTimer, initTimer } from "./init.js";
+import { services, getStatusService, initTimer } from "./init.js";
 
 export const initPromiseServices = () => {
   const startServiceWithPromise = (service, duration) => {
@@ -9,9 +9,9 @@ export const initPromiseServices = () => {
           nextServiceToWork = s;
         }
       });
-      console.log("#", service, "started at", getTimer(), "ms");
+      getStatusService(service, "start");
       setTimeout(() => {
-        console.log("#", service, "ended at", getTimer(), "ms");
+        getStatusService(service, "end");
         resolve(nextServiceToWork);
       }, duration);
     });

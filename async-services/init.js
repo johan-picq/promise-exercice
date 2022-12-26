@@ -37,23 +37,26 @@ export const services = [
 ];
 const TotalDurationServices = 16000;
 let timer = 0;
-let run = false;
 export const initTimer = () => {
-  run = true;
   const interval = setInterval(() => {
     timer = timer + 100;
     if (timer >= TotalDurationServices) {
       clearInterval(interval);
       timer = 0;
-      run = false;
     }
   }, 100);
 };
 
-export const getTimer = () => {
+const getTimer = () => {
   return timer;
 };
 
-export const isRunning = () => {
-  return run;
+export const getStatusService = (service, status) => {
+  console.log(
+    "#",
+    service,
+    status === "start" ? "started at" : "ended at",
+    getTimer(),
+    "ms"
+  );
 };

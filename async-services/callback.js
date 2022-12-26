@@ -1,4 +1,4 @@
-import { services, getTimer, initTimer } from "./init.js";
+import { services, getStatusService, initTimer } from "./init.js";
 
 export const initCallbackServices = () => {
   const startServiceWithCallback = (service, duration, callback) => {
@@ -8,9 +8,9 @@ export const initCallbackServices = () => {
         nextServiceToWork = s;
       }
     });
-    console.log("#", service, "started at", getTimer(), "ms");
+    getStatusService(service, "start");
     setTimeout(() => {
-      console.log("#", service, "ended at", getTimer(), "ms");
+      getStatusService(service, "end");
       callback(nextServiceToWork);
     }, duration);
   };
