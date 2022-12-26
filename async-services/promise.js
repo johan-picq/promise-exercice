@@ -16,6 +16,7 @@ export const initPromiseServices = () => {
       }, duration);
     });
   };
+
   initTimer();
   services.forEach((service) => {
     if (service.dependancies === null) {
@@ -25,7 +26,14 @@ export const initPromiseServices = () => {
             startServiceWithPromise(
               nextServiceToWork.id,
               nextServiceToWork.duration
-            );
+            ).then((nextServiceToWork) => {
+              if (nextServiceToWork) {
+                startServiceWithPromise(
+                  nextServiceToWork.id,
+                  nextServiceToWork.duration
+                );
+              }
+            });
           }
         }
       );
