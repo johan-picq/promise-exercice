@@ -32,7 +32,7 @@ export const services = [
   {
     id: 7,
     dependancies: 5,
-    duration: 3200,
+    duration: 3700,
   },
 ];
 const TotalDurationServices = 16000;
@@ -59,4 +59,8 @@ export const getStatusService = (service, status) => {
     getTimer(),
     "ms"
   );
+};
+
+export const timeout = (ms) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 };
