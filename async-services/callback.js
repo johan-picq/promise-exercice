@@ -1,18 +1,18 @@
 import { services, getStatusService, initTimer } from "./init.js";
-
+// A REVOIR DEPENDENCIES
 export const initCallbackServices = () => {
-  const startServiceWithCallback = (service, duration, callback) => {
+  const startServiceWithCallback = (service, callback) => {
     let nextServiceToWork = null;
     services.forEach((s) => {
-      if (s.dependancies === service) {
+      if (s.dependancies.includes(service.id)) {
         nextServiceToWork = s;
       }
     });
-    getStatusService(service, "start");
+    getStatusService(service.id, "start");
     setTimeout(() => {
-      getStatusService(service, "end");
+      getStatusService(service.id, "end");
       callback(nextServiceToWork);
-    }, duration);
+    }, service.duration);
   };
 
   const startServiceCallback = (nextServiceToWork) => {
@@ -28,11 +28,7 @@ export const initCallbackServices = () => {
   initTimer();
   services.forEach((service) => {
     if (service.dependancies === null) {
-      return startServiceWithCallback(
-        service.id,
-        service.duration,
-        startServiceCallback
-      );
+      return startServiceWithCallback(service, startServiceCallback);
     }
   });
 };

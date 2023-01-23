@@ -1,24 +1,25 @@
 import { services, getStatusService, timeout, initTimer } from "./init.js";
+// A REVOIR DEPENDENCIES
 export const initAsyncServices = () => {
-  const startServiceWithAsync = async (service, duration) => {
+  const startServiceWithAsync = async (service) => {
     let nextServiceToWork = null;
     services.forEach((s) => {
-      if (s.dependancies === service) {
+      if (s.dependancies === service.id) {
         nextServiceToWork = s;
       }
     });
-    getStatusService(service, "start");
-    await timeout(duration);
-    getStatusService(service, "end");
+    getStatusService(service.id, "start");
+    await timeout(service.duration);
+    getStatusService(service.id, "end");
     if (nextServiceToWork) {
-      startServiceWithAsync(nextServiceToWork.id, nextServiceToWork.duration);
+      startServiceWithAsync(nextServiceToWork);
     }
   };
 
   initTimer();
   services.forEach((service) => {
     if (service.dependancies === null) {
-      startServiceWithAsync(service.id, service.duration);
+      startServiceWithAsync(service);
     }
   });
 };

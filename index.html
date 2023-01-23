@@ -20,7 +20,7 @@
     }
     .flex {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
     }
     .service {
       border: 1px solid black;
@@ -30,11 +30,11 @@
       margin: 20px;
       padding: 20px;
       font-family: monospace;
+      text-align: center;
       font-size: 16px;
     }
     .button {
       appearance: none;
-      margin: 5px;
       padding: 5px;
       cursor: pointer;
       transition: .2s;
@@ -65,51 +65,70 @@
   <div class="group">
     <h1>Services with no dependencies</h1>
     <div class="flex">
-      <div class="service">
-        <div>[Service #1] No deps with other services</div>
-        <div>[Service #1] Started at 0s</div>
-        <div>[Service #1] Ended at 9.2s (random timeout between 0 and 10 seconds)</div>
+      <div class="service" id="service1">
+        <h3> service #1</h3>
+        <div class="state">
+          <p class="started"></p>
+          <p class="ended"></p>
+        </div>
       </div>
-      <div class="service">
-        <div>[Service #2] No deps with other services</div>
-        <div>[Service #2] Started at 0s</div>
-        <div>[Service #2] Ended at 1.4s (random timeout between 0 and 10 seconds)</div>
+      <div class="service" id="service2">
+        <h3> service #2</h3>
+        <div class="state">
+          <p class="started"></p>
+          <p class="ended"></p>
+        </div>
       </div>
     </div>
     <div class="flex">
-      <div class="service">
-        <div>[Service #3] No deps with other services</div>
-        <div>[Service #3] Started at 0s</div>
-        <div>[Service #3] Ended at 7.9s (random timeout between 0 and 10 seconds)</div>
+      <div class="service" id="service3">
+        <h3> service #3</h3>
+        <div class="state">
+          <p class="started"></p>
+          <p class="ended"></p>
+        </div>
       </div>
-      <div class="service">
-        <div>[Service #4] No deps with other services</div>
-        <div>[Service #4] Started at 0s</div>
-        <div>[Service #4] Ended at 3.0s (random timeout between 0 and 10 seconds)</div>
+      <div class="service" id="service4">
+        <h3> service #4</h3>
+        <div class="state">
+          <p class="started"></p>
+          <p class="ended"></p>
+        </div>
       </div>
     </div>
   </div>
   <div class="group">
     <h1>Dependencies with services #1, #2, #3 and #4</h1>
     <div class="flex">
-      <div class="service">
-        <div>[Service #5] Waiting services #1 and #2 to end</div>
-        <div>[Service #5] Started at 9.2s</div>
-        <div>[Service #5] Ended at 11.4s (random timeout between 0 and 10 seconds)</div>
+      <div class="service" id="service5">
+        <h3> service #5</h3>
+        <h5>Waiting services #1 and #2 to start</h5>
+        <div class="state">
+          <p class="started"></p>
+          <p class="ended"></p>
+        </div>
       </div>
-      <div class="service">
-        <div>[Service #6] Waiting services #3 and #4 to end</div>
-        <div>[Service #6] Started at 7.9s</div>
-        <div>[Service #6] Ended at 8.5s (random timeout between 0 and 10 seconds)</div>
+      <div class="service" id="service6">
+        <h3> service #6</h3>
+        <h5>Waiting services #3 and #4 to start</h5>
+        <div class="state">
+          <p class="started"></p>
+          <p class="ended"></p>
+        </div>
       </div>
     </div>
   </div>
   <div class="group">
     <h1>Dependencies with services #5 and #6</h1>
-    <div class="service">
-      <div>[Service #7] Waiting services #5 and #6 to end</div>
-      <div>[Service #7] Started at 11.4s</div>
-      <div>[Service #7] Ended at 15.1s (random timeout between 0 and 10 seconds)</div>
+    <div class="flex">
+      <div class="service" id="service7">
+        <h3> service #7</h3>
+        <h5>Waiting services #5 and #6 to start</h5>
+        <div class="state">
+          <p class="started"></p>
+          <p class="ended"></p>
+        </div>
+      </div>
     </div>
   </div>
   <script type="module" src="/main.js"></script>

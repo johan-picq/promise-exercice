@@ -1,64 +1,76 @@
-export const services = [
+export let services = [
   {
     id: 1,
     dependancies: null,
-    duration: 9200,
   },
   {
     id: 2,
     dependancies: null,
-    duration: 1400,
   },
   {
     id: 3,
     dependancies: null,
-    duration: 7900,
   },
   {
     id: 4,
     dependancies: null,
-    duration: 3000,
   },
   {
     id: 5,
-    dependancies: 1,
-    duration: 2200,
+    dependancies: [1, 2],
   },
   {
     id: 6,
-    dependancies: 3,
-    duration: 600,
+    dependancies: [3, 4],
   },
   {
     id: 7,
-    dependancies: 5,
-    duration: 3700,
+    dependancies: [5, 6],
   },
 ];
-const TotalDurationServices = 16000;
+let totalDurationServices = 0;
 let timer = 0;
+
+const getRandomTimer = () => {
+  return Math.round(Math.random() * 100) * 100;
+};
+
+services.forEach((e) => {
+  e.duration = getRandomTimer();
+  totalDurationServices += e.duration;
+});
+
+console.log(services);
 export const initTimer = () => {
   const interval = setInterval(() => {
     timer = timer + 100;
-    if (timer >= TotalDurationServices) {
+    if (timer > totalDurationServices) {
       clearInterval(interval);
       timer = 0;
     }
   }, 100);
 };
 
-const getTimer = () => {
-  return timer;
+const getTimer = (unit = "ms") => {
+  if (unit === "s") {
+    return timer / 1000;
+  } else {
+    return timer;
+  }
 };
 
 export const getStatusService = (service, status) => {
-  console.log(
-    "#",
-    service,
-    status === "start" ? "started at" : "ended at",
-    getTimer(),
-    "ms"
-  );
+  if (status === "start") {
+    document.querySelector("#service" + service).style.background = "yellow";
+    document.querySelector("#service" + service + " .started").innerHTML =
+      "started at " + getTimer("s") + "s";
+    console.log("#", service, "started at", getTimer(), "ms");
+  } else {
+    document.querySelector("#service" + service).style.background = "green";
+    document.querySelector("#service" + service + " .ended").innerHTML =
+      "ended at " + getTimer("s") + "s";
+    console.log("#", service, "endeed at", getTimer(), "ms");
+  }
 };
 
 export const timeout = (ms) => {
