@@ -1,34 +1,25 @@
-import { services, getStatusService, initTimer } from "./init.js";
-
+import { services, init, getStatusService, nextServicetoRun } from "./init.js";
 export const initPromiseServices = () => {
-  const startServiceWithPromise = (service) => {
+  const startService = (service) => {
     return new Promise((resolve) => {
-      let nextServiceToWork = null;
-      services.forEach((s) => {
-        if (s.dependancies === service.id) {
-          nextServiceToWork = s;
-        }
-      });
       getStatusService(service.id, "start");
       setTimeout(() => {
         getStatusService(service.id, "end");
-        resolve(nextServiceToWork);
+        resolve(service.id);
       }, service.duration);
     });
   };
 
-  initTimer();
+  init();
   services.forEach((service) => {
-    if (service.dependancies === null) {
-      startServiceWithPromise(service).then((nextServiceToWork) => {
-        if (nextServiceToWork) {
-          startServiceWithPromise(nextServiceToWork).then(
-            (nextServiceToWork) => {
-              if (nextServiceToWork) {
-                startServiceWithPromise(nextServiceToWork);
-              }
+    if (!service.dependancies.length) {
+      startService(service).then((serviceId) => {
+        if (nextServicetoRun(serviceId)) {
+          startService(nextServicetoRun(serviceId)).then((serviceId) => {
+            if (nextServicetoRun(serviceId)) {
+              startService(nextServicetoRun(serviceId));
             }
-          );
+          });
         }
       });
     }

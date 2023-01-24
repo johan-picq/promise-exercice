@@ -1,34 +1,24 @@
-import { services, getStatusService, initTimer } from "./init.js";
-// A REVOIR DEPENDENCIES
+import { services, init, getStatusService, nextServicetoRun } from "./init.js";
+
 export const initCallbackServices = () => {
-  const startServiceWithCallback = (service, callback) => {
-    let nextServiceToWork = null;
-    services.forEach((s) => {
-      if (s.dependancies.includes(service.id)) {
-        nextServiceToWork = s;
-      }
-    });
+  const startService = (service, callback) => {
     getStatusService(service.id, "start");
     setTimeout(() => {
       getStatusService(service.id, "end");
-      callback(nextServiceToWork);
+      callback(service.id);
     }, service.duration);
   };
 
-  const startServiceCallback = (nextServiceToWork) => {
-    if (nextServiceToWork) {
-      startServiceWithCallback(
-        nextServiceToWork.id,
-        nextServiceToWork.duration,
-        startServiceCallback
-      );
+  const startServiceCallback = (serviceId) => {
+    if (nextServicetoRun(serviceId)) {
+      startService(nextServicetoRun(serviceId), startServiceCallback);
     }
   };
 
-  initTimer();
+  init();
   services.forEach((service) => {
-    if (service.dependancies === null) {
-      return startServiceWithCallback(service, startServiceCallback);
+    if (!service.dependancies.length) {
+      startService(service, startServiceCallback);
     }
   });
 };

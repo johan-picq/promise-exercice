@@ -17,13 +17,14 @@
       border: 2px solid black;
       margin-bottom: 20px;
       padding: 20px;
+      text-align: center;
     }
     .flex {
       display: flex;
       justify-content: center;
     }
     .service {
-      border: 1px solid black;
+      border: 1px solid #ddd;
       background: #fff;
       box-shadow: 5px 5px #ddd;
       height: auto;
@@ -44,7 +45,19 @@
     }
     .button:disabled {
       box-shadow: none !important;
-      background-color: #ddd;
+    }
+    #global-status {
+      display: inline-block;
+      padding: 5px;
+      margin: 10px auto;
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 15px;
+      font-style: italic;
+    }
+    .started, .ended {
+      font-style: italic;
+      font-size: 12px;
     }
   </style>
 </head>
@@ -61,39 +74,32 @@
         Run Async/Await Services
       </button>
     </div>
+    <p id="global-status"></p>
   </div>
   <div class="group">
     <h1>Services with no dependencies</h1>
     <div class="flex">
       <div class="service" id="service1">
-        <h3> service #1</h3>
-        <div class="state">
-          <p class="started"></p>
-          <p class="ended"></p>
-        </div>
+        <h3>Service #1</h3>
+        <p class="started"></p>
+        <p class="ended"></p>
       </div>
       <div class="service" id="service2">
-        <h3> service #2</h3>
-        <div class="state">
-          <p class="started"></p>
-          <p class="ended"></p>
-        </div>
+        <h3>Service #2</h3>
+        <p class="started"></p>
+        <p class="ended"></p>
       </div>
     </div>
     <div class="flex">
       <div class="service" id="service3">
-        <h3> service #3</h3>
-        <div class="state">
-          <p class="started"></p>
-          <p class="ended"></p>
-        </div>
+        <h3>Service #3</h3>
+        <p class="started"></p>
+        <p class="ended"></p>
       </div>
       <div class="service" id="service4">
-        <h3> service #4</h3>
-        <div class="state">
-          <p class="started"></p>
-          <p class="ended"></p>
-        </div>
+        <h3>Service #4</h3>
+        <p class="started"></p>
+        <p class="ended"></p>
       </div>
     </div>
   </div>
@@ -101,20 +107,16 @@
     <h1>Dependencies with services #1, #2, #3 and #4</h1>
     <div class="flex">
       <div class="service" id="service5">
-        <h3> service #5</h3>
+        <h3>Service #5</h3>
         <h5>Waiting services #1 and #2 to start</h5>
-        <div class="state">
-          <p class="started"></p>
-          <p class="ended"></p>
-        </div>
+        <p class="started"></p>
+        <p class="ended"></p>
       </div>
       <div class="service" id="service6">
-        <h3> service #6</h3>
+        <h3>Service #6</h3>
         <h5>Waiting services #3 and #4 to start</h5>
-        <div class="state">
-          <p class="started"></p>
-          <p class="ended"></p>
-        </div>
+        <p class="started"></p>
+        <p class="ended"></p>
       </div>
     </div>
   </div>
@@ -122,12 +124,10 @@
     <h1>Dependencies with services #5 and #6</h1>
     <div class="flex">
       <div class="service" id="service7">
-        <h3> service #7</h3>
+        <h3>Service #7</h3>
         <h5>Waiting services #5 and #6 to start</h5>
-        <div class="state">
-          <p class="started"></p>
-          <p class="ended"></p>
-        </div>
+        <p class="started"></p>
+        <p class="ended"></p>
       </div>
     </div>
   </div>
