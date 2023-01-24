@@ -31,13 +31,12 @@ export let services = [
 
 let timer = 0;
 let servicesDone = [];
-totalDurationServices = 0;
+let interval = null;
 
 export const init = () => {
-  services.forEach((e) => {
-    e.duration = Math.round(Math.random() * 100) * 100;
+  services.forEach((s) => {
+    s.duration = Math.round(Math.random() * 100) * 100;
   });
-  // get total duration
   document
     .querySelectorAll(".service")
     .forEach((s) => (s.style.background = "#fff"));
@@ -48,15 +47,12 @@ export const init = () => {
   document.querySelectorAll(".ended").forEach((s) => (s.innerHTML = ""));
   document.querySelector("#global-status").style.background = "yellow";
   document.querySelector("#global-status").innerHTML = "running";
-  const interval = setInterval(() => {
+  interval = setInterval(() => {
     timer = timer + 100;
-    if (timer > totalDurationServices) {
-      clear(interval);
-    }
   }, 100);
 };
 
-const clear = (interval) => {
+const clear = () => {
   clearInterval(interval);
   console.log("all services are over after ", getTimer());
   document.querySelector("#global-status").style.background = "green";
