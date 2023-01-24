@@ -5,7 +5,8 @@
 - Some services have one level of dependencies:
   - Service #5 has to wait #1 and #2 to complete before starting
   - Service #6 has to wait #3 and #4 to complete before starting
-- One service has two level of dependencies \* Service #7 has to wait service #5 and #6 to complete before starting
+- One service has two level of dependencies:
+  - Service #7 has to wait service #5 and #6 to complete before starting
 - logs will be written dynamically by your JavaScript when a service start or end
 - Implement the logic described above 3 times:
   - 1st, try with callbacks
@@ -15,5 +16,5 @@
 
 for run:
 
-`npm install`
+`npm install`  
 `npm run dev`
